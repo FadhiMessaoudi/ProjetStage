@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Categories;
 use App\Form\CategoriesType;
+use Doctrine\Persistence\ManagerRegistry;
 
 /**
  * @Route("/admin", name="admin_")
@@ -24,11 +25,22 @@ class AdminController extends AbstractController
         ]);
     }
     #[Route('/categories/ajout', name: 'categories_ajout')]
-    public function ajoutCategorie(Request $request): Response
+    public function ajoutCategorie(Request $request, ManagerRegistry $doctrine): Response
     {
         $categorie = new Categories;
 
-        $form = $this->createForm(CategoriesType::class, $categorie);
+        $form = $this->createForm(CategoriesType::class, $categorie,);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $doctrine->getManager();
+            $em->persist($categorie);
+            $em->flush();
+
+            return $this->redirectToRoute('admin_home');
+        }
+
         return $this->render('admin/categories/ajout.html.twig', [
             'form' => $form->createView()
         ]);
