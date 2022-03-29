@@ -11,6 +11,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use FOS\CKEditorBundle\Form\Type\CKEditorType;
 
 class AnnoncesType extends AbstractType
 {
@@ -19,7 +20,7 @@ class AnnoncesType extends AbstractType
         $builder
             ->add('title', TextType::class)
             // ->add('slug')
-            ->add('content', TextareaType::class)
+            ->add('content', CKEditorType::class)
             //   ->add('created_at')
             //  ->add('active')
             //  ->add('users')
