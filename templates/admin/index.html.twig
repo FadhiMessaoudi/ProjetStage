@@ -1,20 +1,37 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello AdminController!{% endblock %}
+{% block title %}Gerer les annonces
+{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+	<h1>Gérer les annonces</h1>
+	<a href="{{path('admin_annonces_ajout')}}" class="btn shadow-1 rounded-1 blue">Ajouter une annonce</a>
+	<div class="table-responsive">
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>Titre</th>
+					<th>Date</th>
+					<th>Active</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for annonce in annonces %}
+					<tr>
+						<td>{{annonce.id}}</td>
+						<td>{{annonce.title}}</td>
+						<td>{{annonce.createdAt|date}}</td>
+						<td>{{annonce.active}}</td>
+						<td class="text-center">
+							<a href="{{path('admin_annonces_modif', {id: annonce.id})}}" class="btn shadow-1 rounded-1 blue">Modifier</a>
+						</td>
+					</tr>
+				{% endfor %}
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+			</tbody>
+		</table>
+	</div>
+	{{dump(annonces)}}
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/Users/Foudo/Documents/demos/petitesannonces/src/Controller/AdminController.php'|file_link(0) }}">src/Controller/AdminController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/Users/Foudo/Documents/demos/petitesannonces/templates/admin/index.html.twig'|file_link(0) }}">templates/admin/index.html.twig</a></code></li>
-    </ul>
-</div>
 {% endblock %}

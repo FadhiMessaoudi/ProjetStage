@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Admin;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -12,7 +12,7 @@ use Doctrine\Persistence\ManagerRegistry;
 
 /**
  * @Route("/admin", name="admin_")
- * @package App/Controller
+ * @package App\Controller\Admin
  */
 
 class AdminController extends AbstractController
